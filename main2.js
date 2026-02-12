@@ -1,11 +1,23 @@
 function findCube(num) {
-    if (num <= 0) {
-        return "Please provide a positive integer";
+    if (typeof num !== 'number' || !Number.isInteger(num) || num <= 0) {
+        return null;
     }
     return num * num * num;
 }
 
-// Example usage
-console.log(findCube(5));  // Output: 125
-console.log(findCube(3));  // Output: 27
-console.log(findCube(10)); // Output: 1000
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+console.log('Please enter a positive integer:');
+readline.question('', (answer) => {
+    const num = Number(answer);
+    const cube = findCube(num);
+    if (cube === null) {
+        console.log('Please provide a positive integer');
+    } else {
+        console.log(cube);
+    }
+    readline.close();
+});
